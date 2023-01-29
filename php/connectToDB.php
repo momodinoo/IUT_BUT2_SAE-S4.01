@@ -1,16 +1,21 @@
 <?php
-$dbHostname = "localhost";
-$dbName = "sondage";
-$dbLogin = "root";
-$dbPwd = "";
-$dbURL = "mysql:server=$dbHostname;dbname=$dbName";
-function connectToDB () {
+function connectToDB (){
+    $host = 'sql.freedb.tech';
+    $db   = 'freedb_momododo';
+    $user = 'freedb_momododo';
+    $pass = 'unfw7W@2%K%thrT';
+    $port = "3306";
+    $charset = 'utf8mb4';
+
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ];
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
+
     try {
-        global $dbLogin, $dbPwd, $dbURL;
-        return new PDO ($dbURL, $dbLogin, $dbPwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-    } catch (PDOException $e) {
-        $error = $e->getMessage();
-        echo mb_convert_encoding("Error accessing database : $error \n", 'UTF-8');
-        return null;
+        return new PDO($dsn, $user, $pass, $options);
+    } catch (\PDOException $e) {
+        throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
 }

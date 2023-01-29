@@ -17,7 +17,7 @@
 
 <main class="container">
     <h1>Répondre au sondage</h1>
-    <form action="#" method="post">
+    <form action="./php/addAliment.php" method="post">
         <h2>Choisissez ce que vous consommez :</h2>
 
         <fieldset>
@@ -46,37 +46,50 @@
         <fieldset>
             <legend> A quel moment prenez-vous ce repas ?</legend>
 
-            <input id="dej" name="moment" type="radio" value="Petit Déjeuner">
+            <input id="dej" name="moment" type="radio" value="Matin">
             <label for="dej">Petit Déjeuner</label>
 
-            <input id="diner" name="moment" type="radio" value="Diner">
+            <input id="diner" name="moment" type="radio" value="Soir">
             <label for="diner">Diner</label>
         </fieldset>
 
         <fieldset>
             <legend>De quoi se compose t'il ?</legend>
             <label for="typeAliment">Sélectionner un type d'aliments</label>
-            <select class="list" id="typeAliment">
+            <select class="list" id="typeAliment" name="typeAliment">
                 <option disabled selected value="NON_SELECTED_VALUE">Choisir un type</option>
                 <?php foreach ($types as $value): ?>
-                <option name='type' value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
+                <option value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
                 <?php endforeach; ?>
             </select>
 
             <label for="aliment">Sélectionner un aliment</label>
-            <select class="list" id="aliment">
+            <select class="list" id="aliment" name="aliment">
                 <option disabled selected value="NON_SELECTED_VALUE">Choisir un aliment</option>
-
-
-
             </select>
 
             <label for="quantite">Quantité</label>
-            <input id="quantite" name="quantite" required type="number" value="1" min="1">
+            <input id="quantite" min="1" max="5" name="quantite" required type="number" value="1">
         </fieldset>
 
-        <input id="addMeal" type="button" value="Valider le repas"/>
-        <?= $msg_confirmation ?>
+        <input id="addMeal" type="submit" value="Valider le repas"/>
+
+        <?php if (!empty($errors)) : ?>
+        <?php foreach ($errors as $error): ?>
+        <div class="errors">
+            <?= $error ?> <br/>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if (!empty($success)) : ?>
+        <?php foreach ($success as $sus): ?>
+        <div class="success">
+            <?= $sus ?> <br/>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+
     </form>
 </main>
 <script>
@@ -85,7 +98,7 @@
     alimentsType.onchange = async () => {
         let value = alimentsType.options[alimentsType.selectedIndex].value;
 
-        if(value === "NON_SELECTED_VALUE") return;
+        if (value === "NON_SELECTED_VALUE") return;
 
         const formData = new FormData();
         formData.append('type', value);
@@ -102,7 +115,7 @@
             alimentList.removeChild(alimentList.lastChild);
         }
 
-        for(let aliment of content) {
+        for (let aliment of content) {
             const alimentOption = document.createElement("option");
             alimentOption.value = aliment;
             alimentOption.innerText = aliment;
