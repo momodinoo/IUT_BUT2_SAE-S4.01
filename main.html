@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="*" http-equiv="Access-Control-Allow-Origin"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Répondre au sondage</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="assets/img/icon.ico" rel="icon">
+    <link href="assets/css/index.css" rel="stylesheet">
+</head>
+
+<body>
+
+<main class="container">
+    <h1>Répondre au sondage</h1>
+    <form action="#" method="post">
+        <h2>Choisissez ce que vous consommez :</h2>
+
+        <fieldset>
+            <legend> Vos informations</legend>
+            <label for="age">Votre Age</label>
+            <select id="age" name="age">
+                <option disabled selected value="NON_SELECTED_VALUE">
+                    Entre 10 et 18 ans
+                </option>
+
+                <?php for ($i = 10; $i <= 18; $i++): ?>
+                <option value="<?= $i ?>">
+                    <?= $i ?>
+                </option>
+                <?php endfor; ?>
+            </select>
+
+            <label>Votre niveau d'enseignement</label>
+            <input id="college" name="enseignement" type="radio" value="Collège">
+            <label for="college">Collège</label>
+
+            <input id="lycee" name="enseignement" type="radio" value="Lycée">
+            <label for="lycee">Lycée</label>
+        </fieldset>
+
+        <fieldset>
+            <legend> A quel moment prenez-vous ce repas ?</legend>
+
+            <input id="dej" name="moment" type="radio" value="Petit Déjeuner">
+            <label for="dej">Petit Déjeuner</label>
+
+            <input id="diner" name="moment" type="radio" value="Diner">
+            <label for="diner">Diner</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>De quoi se compose t'il ?</legend>
+            <label for="typeAliment">Sélectionner un type d'aliments</label>
+            <select class="list" id="typeAliment">
+                <option disabled selected value="NON_SELECTED_VALUE">Choisir un type</option>
+                <?php foreach ($types as $value): ?>
+                <option name='type' value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
+                <?php endforeach; ?>
+            </select>
+
+            <label for="aliment">Sélectionner un aliment</label>
+            <select class="list" id="aliment">
+                <option disabled selected value="NON_SELECTED_VALUE">Choisir un aliment</option>
+
+
+
+            </select>
+
+            <label for="quantite">Quantité</label>
+            <input id="quantite" name="quantite" required type="number" value="1" min="1">
+        </fieldset>
+
+        <input id="addMeal" type="button" value="Valider le repas"/>
+        <?= $msg_confirmation ?>
+    </form>
+</main>
+<script>
+    const alimentsType = document.getElementById("typeAliment");
+
+    alimentsType.onchange = async () => {
+        let value = alimentsType.options[alimentsType.selectedIndex].value;
+
+        if(value === "NON_SELECTED_VALUE") return;
+
+        const formData = new FormData();
+        formData.append('type', value);
+
+        const res = await fetch("./php/getAlimentsByType.php", {
+            method: "POST",
+            body: formData,
+        })
+
+        const content = JSON.parse(await res.text())
+        const alimentList = document.getElementById("aliment");
+
+        while (alimentList.childElementCount !== 1) {
+            alimentList.removeChild(alimentList.lastChild);
+        }
+
+        for(let aliment of content) {
+            const alimentOption = document.createElement("option");
+            alimentOption.value = aliment;
+            alimentOption.innerText = aliment;
+
+            alimentList.appendChild(alimentOption);
+        }
+    }
+</script>
+
+</body>
+</html>

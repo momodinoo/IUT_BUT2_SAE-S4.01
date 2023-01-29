@@ -1,0 +1,15 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+}
+
+body{
+    background: rgba(118, 109, 109, 0.81);
+    color: #dedbdb;
+    font-family: 'Montserrat', serif;
+}
