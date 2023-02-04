@@ -22,8 +22,9 @@
 
         <fieldset>
             <legend> Vos informations</legend>
-            <label for="age">Votre Age</label>
-            <select id="age" name="age">
+            <div class="champ">
+                <label for="age">Votre Age</label>
+                <select class = "list" id="age" name="age">
                 <option disabled selected value="NON_SELECTED_VALUE">
                     Entre 10 et 18 ans
                 </option>
@@ -33,43 +34,51 @@
                     <?= $i ?>
                 </option>
                 <?php endfor; ?>
-            </select>
+                </select>
+            </div>
 
-            <label>Votre niveau d'enseignement</label>
-            <input id="college" name="enseignement" type="radio" value="Collège">
-            <label for="college">Collège</label>
-
-            <input id="lycee" name="enseignement" type="radio" value="Lycée">
-            <label for="lycee">Lycée</label>
+            <div class="champ">
+                <label>Votre niveau d'enseignement</label>
+                <input id="college" class = "butt Ens" name="enseignement" type="button" value="Collège">
+                <input id="lycee" class = "butt Ens" name="enseignement" type="button" value="Lycée">
+            </div>
         </fieldset>
 
         <fieldset>
             <legend> A quel moment prenez-vous ce repas ?</legend>
 
-            <input id="dej" name="moment" type="radio" value="Matin">
-            <label for="dej">Petit Déjeuner</label>
-
-            <input id="diner" name="moment" type="radio" value="Soir">
-            <label for="diner">Diner</label>
+            <div class="champ">
+                <input id="dej" class = "butt moment" name="moment" type="button" value="Matin">
+                <input id="diner" class = "butt moment" name="moment" type="button" value="Soir">
+            </div>
+            
         </fieldset>
 
         <fieldset>
             <legend>De quoi se compose t'il ?</legend>
-            <label for="typeAliment">Sélectionner un type d'aliments</label>
-            <select class="list" id="typeAliment" name="typeAliment">
+
+            <div class="champ">
+                <label for="typeAliment">Sélectionner un type d'aliments</label>
+                <select class="list" id="typeAliment" name="typeAliment">
                 <option disabled selected value="NON_SELECTED_VALUE">Choisir un type</option>
                 <?php foreach ($types as $value): ?>
                 <option value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
                 <?php endforeach; ?>
-            </select>
+                </select>
+            </div>
 
-            <label for="aliment">Sélectionner un aliment</label>
-            <select class="list" id="aliment" name="aliment">
+            <div class="champ">
+                <label for="aliment">Sélectionner un aliment</label>
+                <select class="list" id="aliment" name="aliment">
                 <option disabled selected value="NON_SELECTED_VALUE">Choisir un aliment</option>
-            </select>
-
-            <label for="quantite">Quantité</label>
-            <input id="quantite" min="1" max="5" name="quantite" required type="number" value="1">
+                </select>
+            </div>
+            
+            <div class="champ">
+                <label for="quantite">Quantité</label>
+                <input id="quantite" min="1" max="5" name="quantite" required type="number" value="1">
+            </div>
+            
         </fieldset>
 
         <input id="addMeal" type="submit" value="Valider le repas"/>
@@ -123,6 +132,40 @@
             alimentList.appendChild(alimentOption);
         }
     }
+
+    window.onload = function() {
+        BoutonsEns = document.getElementsByClassName('Ens');
+        BoutonsMoment = document.getElementsByClassName('moment');
+        for(i=0; i<BoutonsEns.length;i++){
+            BoutonsEns[i].onclick = function() {
+                clickButtEns(this);
+            }
+        }
+        for(i=0; i<BoutonsMoment.length;i++){
+            BoutonsMoment[i].onclick = function() {
+                clickButtMoment(this);
+            }
+        }
+    }
+
+    function clickButtEns(butt) {
+        butt.classList.toggle('selectionne');
+        for(i=0; i<BoutonsEns.length;i++){
+            if(BoutonsEns[i] != butt){
+                BoutonsEns[i].classList.remove('selectionne');
+            }
+        }
+    }
+
+    function clickButtMoment(butt) {
+        butt.classList.toggle('selectionne');
+        for(i=0; i<BoutonsMoment.length;i++){
+            if(BoutonsMoment[i] != butt){
+                BoutonsMoment[i].classList.remove('selectionne');
+            }
+        }
+    }
+
 </script>
 
 </body>
