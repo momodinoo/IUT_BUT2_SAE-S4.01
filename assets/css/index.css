@@ -8,114 +8,123 @@
     font-family: 'Montserrat';
 }
 
-body,html {
-    height: 100%;
-    width: 100%;
-}
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+/*background-color: lightslategrey; g mal o yeux*/
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    height: 100vh;
 
-body{
-    background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-    color: #dedbdb;
     font-family: 'Montserrat', serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size:1.2em;
+    text-align: center;
+    color: white;
 }
 
 .container {
-    width: 50%;
-    border-radius: 20px;
     background: rgba(0,0,0,.5);
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    padding: 2%;
-    text-align: center;
+    width: 60%;
+    margin: auto;
+    border-radius: 50px;
+    padding: 1% 2% 0;
 }
 
-.container h1 {
-    margin-bottom: 5%;
+.container > .title {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom:2%;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
 }
 
-.container h2 {
-    margin-bottom: 4%;
+.container * .subtitle{
+    font-weight: normal;
 }
 
-fieldset legend {
-    font-size: 20px;
-    padding: 0 20px;
-}
-
-fieldset {
+.field {
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255, 0.3);
+    border: 2px solid lightgrey;
     margin: 2% 0;
-    padding: 2% 1%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+    padding-top: 1%;
 }
 
-fieldset label {
-    margin: 5px;
+.field * {
+    font-size:105%;
 }
 
-.champ{
-    width: 100%;
-    margin: 10px 0;
+.field > .field-leg {
+    padding: 1% 2%;
 }
 
-.list, #quantite, .butt{
+.field > .subfield{
+    margin-bottom: 3%;
+}
+
+.field * label {
+    margin-right: 3%;
+}
+
+.field * .list, .field * .qty{
     background: transparent;
-    border: 1px solid #fff;
+    color: white;
+    border: 1px solid white;
     border-radius: 5px;
-    padding: 5px 5px;
-    color: #fff;
-    font-family: 'Montserrat', serif;
-    cursor: pointer;
-    transition: all 0.7s;
+    padding: 1%;
+    transition: all 0.3s;
     outline: none;
-    box-shadow: 0 15px 25px rgba(0,0,0,.3);
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
 }
 
-.list:hover, #quantite:hover, .butt:hover, .selectionne{
-    background: #fff;
-    color: rgb(0, 0, 0);
+.field * option, .field * .qty:hover, .mealBtn:hover{
+    background-color: white;
+    color:black;
 }
 
-#quantite {
-    text-align: center;
-    width: 10%;
+.field * input{
+    margin-right: 1%;
 }
 
-.Ens {
-    margin: 0 5px;
-}
-
-.moment {
-    width: 15%;
-    margin: 0 5px;
-}
-
-#addMeal {
+.mealBtn {
     background-color:transparent;
+    color:white;
+
     border:2px solid white;
     border-radius: 5px;
-    color:white;
-    padding: 2% 3%;
-    font-size: 20px;
-    text-transform: uppercase;
-    transition: 0.7s;
-    letter-spacing: 0.15em;
+
+    padding: 2% 2%;
+    margin-bottom: 1%;
+
+    font-size: 1.1em;
     font-weight: bold;
-    cursor: pointer;
-    margin-top: 5%;
-    box-shadow: 0 15px 25px rgba(0,0,0,.3);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+
+    transition: 0.4s;
 }
 
-#addMeal:hover {
-    background: white;
-    color:black;
+.mealBtn:hover {
     transform: scale(1.05);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    body{
+        font-size:0.9em;
+    }
+
+    .container{
+        margin-top: 15%;
+        width:80%;
+    }
 }
