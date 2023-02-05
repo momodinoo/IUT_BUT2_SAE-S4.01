@@ -84,6 +84,31 @@ body {
     margin-right: 1%;
 }
 
+.customRadio[type="radio"]{
+    display: none;
+}
+
+.customRadio[type="radio"] + label {
+    display: inline-block;
+    border: 2px solid #d3d3d3;
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.customRadio[type="radio"]:checked+label {
+    background: linear-gradient(-45deg, #23a6d5, #23d5ab);
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+.customRadio[type="radio"]+label:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+
+
+
 .mealBtn {
     background-color:transparent;
     color:white;
@@ -101,6 +126,7 @@ body {
 
     transition: 0.4s;
 }
+
 
 .mealBtn:hover {
     transform: scale(1.05);
