@@ -17,6 +17,14 @@
     <form action="./php/addAliment.php" method="post">
         <h3 class="subtitle">Dans le cadre d'une étude, merci de rentrer vos habitudes alimentaires pour les repas de début et fin de journée. </h3>
 
+        <?php if (!empty($success)) : ?>
+        <?php foreach ($success as $sus): ?>
+        <div class="success">
+            <?= $sus ?> <br/>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+
         <fieldset class="field">
             <legend class="field-leg"> Vos informations</legend>
             <div class="subfield">
@@ -68,7 +76,7 @@
                 </select>
             </div>
 
-            <div class="subfield">
+            <div class="subfield aliment">
                 <label for="aliment">Sélectionnez un aliment</label>
                 <select class="list" id="aliment" name="aliment">
                 <option disabled selected value="NON_SELECTED_VALUE">Choisissez un aliment</option>
@@ -91,18 +99,8 @@
         </div>
         <?php endforeach; ?>
         <?php endif; ?>
-
-        <?php if (!empty($success)) : ?>
-        <?php foreach ($success as $sus): ?>
-        <div class="success">
-            <?= $sus ?> <br/>
-        </div>
-        <?php endforeach; ?>
-        <?php endif; ?>
-
     </form>
 </main>
-<script src="assets/js/onload.js"></script>
 <script>
     const alimentsType = document.getElementById("typeAliment");
 
@@ -130,6 +128,7 @@
             const alimentOption = document.createElement("option");
             alimentOption.value = aliment;
             alimentOption.innerText = aliment;
+            alimentOption.auto
 
             alimentList.appendChild(alimentOption);
         }

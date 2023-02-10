@@ -23,7 +23,7 @@ if (isset($_POST) && count($_POST) > 0) {
         if(!($save)) {
             $_SESSION["errors"]['saving'] = "Erreur lors de l'enregistrement du repas.";
         } else {
-            $_SESSION["success"]['ok'] = "Le repas $aliment, a bien été ajouté(e) $quantite fois.";
+            $_SESSION["success"]['ok'] = "Le repas '$aliment', a bien été ajouté(e) $quantite fois.";
         }
     }
 }
