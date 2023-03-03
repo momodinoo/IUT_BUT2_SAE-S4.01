@@ -4,10 +4,10 @@ import mysql.connector
 import matplotlib.pyplot as plt
 
 config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
     'host' : 'sql.freedb.tech',
     'database' : 'freedb_momododo',
+    'user' : 'freedb_momododo',
+    'password' : 'unfw7W@2%K%thrT',
     'port' : '3306',
     'raise_on_warnings' : True
 }
@@ -25,10 +25,6 @@ result = curseur.fetchall()
 
 for l in result:
     print(l)
-
-
-
-
 
 
 config = {

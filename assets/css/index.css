@@ -137,6 +137,7 @@ form{
 .field * .list, .field * .qty{
     background: transparent;
     border: 1px solid navy;
+    color: navy;
     border-radius: 5px;
     padding: 1%;
     transition: all 0.3s;
@@ -145,6 +146,7 @@ form{
 
 .field * .list{
     width:50%;
+    color:navy;
 }
 
 .field * option{
@@ -214,6 +216,7 @@ form{
 
 .mealBtn {
     background-color: transparent;
+    color: navy;
 
     border:2px solid navy;
     border-radius: 5px;
