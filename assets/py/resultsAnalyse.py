@@ -1,15 +1,13 @@
-pip install mysql-connector-python
-
 import mysql.connector
 import matplotlib.pyplot as plt
 
 config = {
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'port' : '3306',
-    'raise_on_warnings' : True
+    'user': 'freedb_momododo',
+    'password': 'unfw7W@2%K%thrT',
+    'host': 'sql.freedb.tech',
+    'database': 'freedb_momododo',
+    'port': '3306',
+    'raise_on_warnings': True
 }
 
 try:
@@ -17,6 +15,7 @@ try:
 except mysql.connector.Error as err:
     print(err)
     exit()
+
 curseur = connect.cursor()
 
 req = ("SELECT * FROM sondage")
@@ -26,21 +25,8 @@ result = curseur.fetchall()
 for l in result:
     print(l)
 
+# ============== #
 
-config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'port' : '3306',
-    'raise_on_warnings' : True
-}
-
-try:
-    connect = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-    print(err)
-    exit()
 curseur = connect.cursor()
 
 req = ("SELECT type_aliment, COUNT(*) FROM sondage GROUP BY type_aliment")
@@ -57,30 +43,8 @@ ax.set_title("Répartition des types d'aliments dans le sondage")
 
 plt.show()
 
+# ============== #
 
-
-
-
-
-
-
-
-
-
-config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'port' : '3306',
-    'raise_on_warnings' : True
-}
-
-try:
-    connect = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-    print(err)
-    exit()
 curseur = connect.cursor()
 
 req = ("SELECT type_aliment, age, COUNT(*) FROM sondage GROUP BY type_aliment, age ORDER BY age ASC")
@@ -97,34 +61,15 @@ for age_group in data:
     fig, ax = plt.subplots()
     ax.pie(data[age_group].values(), labels=data[age_group].keys(), autopct='%1.1f%%')
     ax.set_title(f"Répartition des types d'aliments dans le sondage (âge: {age_group})")
-    
+
     plt.show()
 
+# ============== #
 
-
-
-
-
-
-
-
-config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'port' : '3306',
-    'raise_on_warnings' : True
-}
-
-try:
-    connect = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-    print(err)
-    exit()
 curseur = connect.cursor()
 
-req = ("SELECT type_aliment, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, niveau_enseignement ORDER BY niveau_enseignement ASC")
+req = (
+    "SELECT type_aliment, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, niveau_enseignement ORDER BY niveau_enseignement ASC")
 curseur.execute(req)
 result = curseur.fetchall()
 
@@ -138,37 +83,15 @@ for niveau_enseignement in data:
     fig, ax = plt.subplots()
     ax.pie(data[niveau_enseignement].values(), labels=data[niveau_enseignement].keys(), autopct='%1.1f%%')
     ax.set_title(f"Répartition des types d'aliments dans le sondage (niveau enseignement: {niveau_enseignement})")
-    
+
     plt.show()
 
+# ============== #
 
-
-
-
-
-
-
-
-
-
-
-config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'port' : '3306',
-    'raise_on_warnings' : True
-}
-
-try:
-    connect = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-    print(err)
-    exit()
 curseur = connect.cursor()
 
-req = ("SELECT type_aliment, moment_journee, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee ORDER BY moment_journee ASC")
+req = (
+    "SELECT type_aliment, moment_journee, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee ORDER BY moment_journee ASC")
 curseur.execute(req)
 result = curseur.fetchall()
 
@@ -182,40 +105,15 @@ for moment_journee in data:
     fig, ax = plt.subplots()
     ax.pie(data[moment_journee].values(), labels=data[moment_journee].keys(), autopct='%1.1f%%')
     ax.set_title(f"Répartition des types d'aliments dans le sondage (moment de la journee: {moment_journee})")
-    
+
     plt.show()
 
+# ============== #
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-config = {
-    'user' : 'freedb_momododo',
-    'password' : 'unfw7W@2%K%thrT',
-    'host' : 'sql.freedb.tech',
-    'database' : 'freedb_momododo',
-    'port' : '3306',
-    'raise_on_warnings' : True
-}
-
-try:
-    connect = mysql.connector.connect(**config)
-except mysql.connector.Error as err:
-    print(err)
-    exit()
 curseur = connect.cursor()
 
-req = ("SELECT type_aliment, moment_journee, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee, niveau_enseignement ORDER BY moment_journee, niveau_enseignement ASC")
+req = (
+    "SELECT type_aliment, moment_journee, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee, niveau_enseignement ORDER BY moment_journee, niveau_enseignement ASC")
 curseur.execute(req)
 result = curseur.fetchall()
 
@@ -230,5 +128,7 @@ for l in result:
 for moment_journee in data:
     for niveau_enseignement in data[moment_journee]:
         fig, ax = plt.subplots()
-        ax.pie(data[moment_journee][niveau_enseignement].values(), labels=data[moment_journee][niveau_enseignement].keys(), autopct='%1.1f%%')
-        ax.set_title(f"Répartition des types d'aliments dans le sondage (moment de la journée: {moment_journee}, niveau d'enseignement: {niveau_enseignement})")
+        ax.pie(data[moment_journee][niveau_enseignement].values(),
+               labels=data[moment_journee][niveau_enseignement].keys(), autopct='%1.1f%%')
+        ax.set_title(
+            f"Répartition des types d'aliments dans le sondage (moment de la journée: {moment_journee}, niveau d'enseignement: {niveau_enseignement})")

@@ -6,6 +6,9 @@
     <title>Nutrition - Sondage</title>
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          referrerpolicy="no-referrer" rel="stylesheet"/>
     <link href="assets/img/icon.ico" rel="icon">
     <link href="assets/css/index.css" rel="stylesheet">
 </head>
@@ -13,7 +16,18 @@
 <body>
 <nav class="navbar">
     <div class="container-flex">
+
+        <div class="toggle-theme">
+            <input class="checkbox" id="toggleTheme" type="checkbox">
+            <label class="label" for="toggleTheme">
+                <i class='fas fa-sun'></i>
+                <i class="fas fa-moon"></i>
+                <div class='ball'></div>
+            </label>
+        </div>
+
         <ul class="navbar-nav">
+
             <li class="nav-item hover-underline-animation">
                 <a class="nav-link" href="index.php">
                     Répondre au sondage
@@ -31,7 +45,8 @@
 
 <main class="container">
     <h1 class="title">Répondre au sondage</h1>
-    <h3 class="subtitle">Dans le cadre d'une étude, merci de rentrer vos habitudes alimentaires pour les repas de début et fin de journée. </h3>
+    <h3 class="subtitle">Dans le cadre d'une étude, merci de rentrer vos habitudes alimentaires pour les repas de début
+        et fin de journée. </h3>
     <form action="./php/addAliment.php" method="post">
 
         <?php if (!empty($success)) : ?>
@@ -54,16 +69,16 @@
             <legend class="field-leg"> Vos informations</legend>
             <div class="subfield">
                 <label for="age">Votre age</label>
-                <select class = "list" id="age" name="age">
-                <option disabled selected value="NON_SELECTED_VALUE">
-                    Entre 10 et 18 ans
-                </option>
+                <select class="list" id="age" name="age">
+                    <option disabled selected value="NON_SELECTED_VALUE">
+                        Entre 10 et 18 ans
+                    </option>
 
-                <?php for ($i = 10; $i <= 18; $i++): ?>
-                <option value="<?= $i ?>">
-                    <?= $i ?>
-                </option>
-                <?php endfor; ?>
+                    <?php for ($i = 10; $i <= 18; $i++): ?>
+                    <option value="<?= $i ?>">
+                        <?= $i ?>
+                    </option>
+                    <?php endfor; ?>
                 </select>
             </div>
 
@@ -96,32 +111,33 @@
             <div class="subfield">
                 <label for="typeAliment">Sélectionnez un type d'aliments</label>
                 <select class="list" id="typeAliment" name="typeAliment">
-                <option disabled selected value="NON_SELECTED_VALUE">Choisissez un type</option>
-                <?php foreach ($types as $value): ?>
-                <option value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
-                <?php endforeach; ?>
+                    <option disabled selected value="NON_SELECTED_VALUE">Choisissez un type</option>
+                    <?php foreach ($types as $value): ?>
+                    <option value='<?= $value["alim_grp_nom_fr"] ?>'> <?= getAlimentType($value) ?> </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
             <div class="subfield aliment">
                 <label for="aliment">Sélectionnez un aliment</label>
                 <select class="list" id="aliment" name="aliment">
-                <option disabled selected value="NON_SELECTED_VALUE">Choisissez un aliment</option>
+                    <option disabled selected value="NON_SELECTED_VALUE">Choisissez un aliment</option>
                 </select>
             </div>
-            
+
             <div class="subfield">
                 <label for="quantite">Quantité</label>
-                <input id="quantite" class="qty" min="1" max="5" name="quantite" required type="number" value="1">
+                <input class="qty" id="quantite" max="5" min="1" name="quantite" required type="number" value="1">
             </div>
-            
+
         </fieldset>
         <div class="infos">Tous les champs sont obligatoires.</div>
         <div class="btnDiv">
-            <input id="addMeal" class="mealBtn" type="submit" value="Valider le repas"/>
+            <input class="mealBtn" id="addMeal" type="submit" value="Valider le repas"/>
         </div>
     </form>
 </main>
+<script src="assets/js/blackMode.js"></script>
 <script>
     const alimentsType = document.getElementById("typeAliment");
 
