@@ -7,6 +7,7 @@
     --base-display-errors-color: red;
     --base-display-success-color: green;
     --base-background-color-toggle-button: #DDDDDD;
+    --base-color-option : var(--base-color);
 
     /* Black theme */
     --base-color-dark: #ECF2FF;
@@ -16,6 +17,7 @@
     --base-display-errors-color-dark: lightcoral;
     --base-display-success-color-dark: lightgreen;
     --base-background-color-toggle-button-dark: var(--base-background-color-dark);
+    --base-color-option-dark : var(--base-background-color-dark);
 }
 
 body.black-mode {
@@ -26,6 +28,7 @@ body.black-mode {
     --base-display-errors-color: var(--base-display-errors-color-dark);
     --base-display-success-color: var(--base-display-success-color-dark);
     --base-background-color-toggle-button: var(--base-background-color-toggle-button-dark);
+    --base-color-option : var(--base-color-option-dark);
 }
 
 /*
@@ -256,12 +259,11 @@ form {
 
 .field * option {
     margin-right: -20%;
-    color: var(--base-background-color-dark);
+    color: var(--base-color-option);
 }
 
 .field * option, .field * .qty:hover {
     background-color: transparent;
-    color: var(--base-color);
 }
 
 .field * input {

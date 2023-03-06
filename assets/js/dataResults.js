@@ -10,7 +10,7 @@ new Chart(ctx, {
             'Yellow'
         ],
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Nombre de personnes',
             data: [300, 50, 100],
             backgroundColor: [
                 'rgb(255, 99, 132)',
