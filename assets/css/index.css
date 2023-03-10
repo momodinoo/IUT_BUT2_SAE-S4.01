@@ -356,13 +356,23 @@ form {
         margin-top: 3%;
     }
 
+    .subtitle{
+        margin-top: 4%;
+        margin-bottom: 4% !important;
+    }
+
+    .field{
+        margin-bottom: 5%;
+    }
+
     .infos, .mealBtn {
         margin-top: 3%;
     }
 
     .navbar-nav {
-        width: 100%;
-        margin-top: 1.5%;
+        width: 80%;
+        margin-top: 1.6%;
+        font-size:0.9em;
     }
 
     .hover-underline-animation:hover::after {
