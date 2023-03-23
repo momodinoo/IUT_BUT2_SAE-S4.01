@@ -1,0 +1,1 @@
+#TODO create methods to manage result data (in Database)
