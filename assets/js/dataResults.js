@@ -1,10 +1,5 @@
 const ctx = document.getElementById('myChart');
 
-const charts = document.querySelector(".chart")
-
-
-// $('cc');
-
 new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -15,6 +10,7 @@ new Chart(ctx, {
         ],
         datasets: [{
             label: 'Nombre de personnes',
+            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--base-navbar-background-color'),
             data: [300, 50, 100],
             backgroundColor: [
                 'rgb(255, 99, 132)',
