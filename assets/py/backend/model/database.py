@@ -1,7 +1,7 @@
 import os
 import mysql.connector
 
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 
 
 class Database:
@@ -28,4 +28,4 @@ class Database:
         return self.database
 
     def get_cursor(self):
-        return self.database.get_cursor()
+        return self.database.cursor()

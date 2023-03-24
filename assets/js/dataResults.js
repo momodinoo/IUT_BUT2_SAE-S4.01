@@ -1,5 +1,9 @@
 const ctx = document.getElementById('myChart');
 
+const charts = document.querySelector(".chart")
+
+
+// $('cc');
 
 new Chart(ctx, {
     type: 'doughnut',
