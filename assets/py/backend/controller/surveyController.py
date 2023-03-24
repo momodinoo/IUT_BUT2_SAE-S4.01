@@ -9,4 +9,4 @@ CORS(app)
 
 @app.route("/")
 def hello_world2():
-    return req1()
+    return mean_age_by_aliment_types()
