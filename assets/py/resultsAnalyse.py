@@ -134,8 +134,6 @@ for moment_journee in data:
         ax.set_title(
             f"Répartition des types d'aliments dans le sondage (moment de la journée: {moment_journee}, niveau d'enseignement: {niveau_enseignement})")
 
-# ============= #
-
 cursor = connect.cursor()
 
 req = ("SELECT aliment, COUNT(*) FROM sondage GROUP BY aliment")
@@ -196,6 +194,7 @@ plt.show()
 
 
 # ============= #
+
 """
 cursor = connect.cursor()
 
@@ -211,9 +210,11 @@ req = ("SELECT age, AVG(CASE WHEN type_aliment = 'viandes, œufs, poissons et as
        "AVG(CASE WHEN type_aliment = 'aliments infantiles' THEN 1 ELSE 0 END) AS alimentsInfantiles,"
        "AVG(CASE WHEN type_aliment = 'aides culinaires et ingrédients divers' THEN 1 ELSE 0 END) AS aidesCulinairesIngrédientsDivers"
        " FROM sondage GROUP BY age ORDER BY age ASC")
+
 cursor.execute(req)
 result = cursor.fetchall()
 types_aliments = [description[0] for description in cursor.description if description[0] != 'age']
+
 
 n_groups = len(result)
 means = [row[1:] for row in result]
