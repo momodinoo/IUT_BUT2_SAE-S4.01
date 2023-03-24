@@ -1,5 +1,6 @@
 import mysql.connector
 import matplotlib.pyplot as plt
+import numpy as np
 
 config = {
     'user': 'freedb_momododo',
@@ -16,9 +17,9 @@ except mysql.connector.Error as err:
     print(err)
     exit()
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
-req = ("SELECT * FROM sondage")
+"""req = ("SELECT * FROM sondage")
 curseur.execute(req)
 result = curseur.fetchall()
 
@@ -29,7 +30,7 @@ for l in result:
 
 curseur = connect.cursor()
 
-req = ("SELECT type_aliment, COUNT(*) FROM sondage GROUP BY type_aliment")
+req = "SELECT type_aliment, COUNT(*) FROM sondage GROUP BY type_aliment"
 curseur.execute(req)
 result = curseur.fetchall()
 
@@ -45,11 +46,11 @@ plt.show()
 
 # ============== #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
-req = ("SELECT type_aliment, age, COUNT(*) FROM sondage GROUP BY type_aliment, age ORDER BY age ASC")
-curseur.execute(req)
-result = curseur.fetchall()
+req = "SELECT type_aliment, age, COUNT(*) FROM sondage GROUP BY type_aliment, age ORDER BY age DESC"
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -66,12 +67,12 @@ for age_group in data:
 
 # ============== #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = (
     "SELECT type_aliment, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, niveau_enseignement ORDER BY niveau_enseignement ASC")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -88,12 +89,12 @@ for niveau_enseignement in data:
 
 # ============== #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = (
     "SELECT type_aliment, moment_journee, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee ORDER BY moment_journee ASC")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -110,12 +111,12 @@ for moment_journee in data:
 
 # ============== #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = (
     "SELECT type_aliment, moment_journee, niveau_enseignement, COUNT(*) FROM sondage GROUP BY type_aliment, moment_journee, niveau_enseignement ORDER BY moment_journee, niveau_enseignement ASC")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -133,13 +134,11 @@ for moment_journee in data:
         ax.set_title(
             f"Répartition des types d'aliments dans le sondage (moment de la journée: {moment_journee}, niveau d'enseignement: {niveau_enseignement})")
 
-# ============= #
-        
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = ("SELECT aliment, COUNT(*) FROM sondage GROUP BY aliment")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -153,11 +152,11 @@ plt.show()
 
 # ============= #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = ("SELECT aliment, moment_journee, COUNT(*) FROM sondage GROUP BY aliment, moment_journee ORDER BY moment_journee ASC")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 data = {}
 for l in result:
@@ -169,16 +168,16 @@ for moment_journee in data:
     fig, ax = plt.subplots()
     ax.pie(data[moment_journee].values(), labels=data[moment_journee].keys(), autopct='%1.1f%%')
     ax.set_title(f"Répartition des aliments dans le sondage (moment de la journee: {moment_journee})")
-    
+
     plt.show()
-    
+
 # ============ #
 
-curseur = connect.cursor()
+cursor = connect.cursor()
 
 req = ("SELECT type_aliment, AVG(age) FROM sondage GROUP BY type_aliment")
-curseur.execute(req)
-result = curseur.fetchall()
+cursor.execute(req)
+result = cursor.fetchall()
 
 type_aliments = []
 moyennes_ages = []
@@ -196,7 +195,8 @@ plt.show()
 
 # ============= #
 
-curseur = connect.cursor()
+"""
+cursor = connect.cursor()
 
 req = ("SELECT age, AVG(CASE WHEN type_aliment = 'viandes, œufs, poissons et assimilés' THEN 1 ELSE 0 END) AS viandesEct,"
        "AVG(CASE WHEN type_aliment = 'produits sucrés' THEN 1 ELSE 0 END) AS sucree,"
@@ -210,9 +210,11 @@ req = ("SELECT age, AVG(CASE WHEN type_aliment = 'viandes, œufs, poissons et as
        "AVG(CASE WHEN type_aliment = 'aliments infantiles' THEN 1 ELSE 0 END) AS alimentsInfantiles,"
        "AVG(CASE WHEN type_aliment = 'aides culinaires et ingrédients divers' THEN 1 ELSE 0 END) AS aidesCulinairesIngrédientsDivers"
        " FROM sondage GROUP BY age ORDER BY age ASC")
-curseur.execute(req)
-result = curseur.fetchall()
-types_aliments = [description[0] for description in curseur.description if description[0] != 'age']
+
+cursor.execute(req)
+result = cursor.fetchall()
+types_aliments = [description[0] for description in cursor.description if description[0] != 'age']
+
 
 n_groups = len(result)
 means = [row[1:] for row in result]
