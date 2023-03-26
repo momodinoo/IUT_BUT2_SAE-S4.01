@@ -1,4 +1,4 @@
-from assets.py.backend.model.database import Database
+from backend.model.database import Database
 
 db = Database()
 cursor = db.get_cursor()
@@ -12,15 +12,18 @@ def aliment_types_repartition():
             "count": count
         }
 
-    req = "SELECT type_aliment, COUNT(*) FROM sondage GROUP BY type_aliment"
+    req = """
+        SELECT type_aliment, COUNT(*) 
+        FROM sondage 
+        GROUP BY type_aliment
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-# TODO filter pour chaque age ou quoi la team
-
-def aliment_types_repartition_17():
+def aliment_types_repartition_with_all_ages():
     def generate_dict(list):
         [type_aliment, age, count] = list
         return {
@@ -29,125 +32,125 @@ def aliment_types_repartition_17():
             "count": count
         }
 
-    req = "SELECT type_aliment, age, COUNT(*) FROM sondage WHERE age=17 GROUP BY type_aliment, age"
+    req = f"""
+        SELECT type_aliment, age, COUNT(*) 
+        FROM sondage
+        GROUP BY type_aliment, age
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-def aliment_types_repartition_12():
+def aliment_types_repartition_by_age(chosen_age: int):
     def generate_dict(list):
-        [type_aliment, age, count] = list
+        [type_aliment, count] = list
         return {
             "type_aliment": type_aliment,
-            "age": age,
             "count": count
         }
 
-    req = "SELECT type_aliment, age, COUNT(*) FROM sondage WHERE age=12 GROUP BY type_aliment, age"
+    req = f"""
+        SELECT type_aliment, COUNT(*) 
+        FROM sondage 
+        WHERE age={chosen_age} 
+        GROUP BY type_aliment
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-# TODO faire une méthode + générale
-
-
-def aliment_types_repartition_by_school_level_college():
-    def generate_dict(list):
-        [type_aliment, school_level, count] = list
-        return {
-            "type_aliment": type_aliment,
-            "school_level": school_level,
-            "count": count
-        }
-
-    req = "SELECT type_aliment, niveau_enseignement, COUNT(*) FROM sondage WHERE niveau_enseignement = 'Collège' " \
-          "GROUP BY type_aliment, niveau_enseignement "
-    cursor.execute(req)
-    result = cursor.fetchall()
-    return list(map(generate_dict, result))
-
-
-def aliment_types_repartition_by_school_level_lycee():
+def aliment_types_repartition_with_all_school_level():
     def generate_dict(list):
         [type_aliment, school_level, count] = list
         return {
             "type_aliment": type_aliment,
-            "school_level": school_level,
+            "niveau_enseignement": school_level,
             "count": count
         }
 
-    req = "SELECT type_aliment, niveau_enseignement, COUNT(*) FROM sondage WHERE niveau_enseignement = 'Lycée' " \
-          "GROUP BY type_aliment, niveau_enseignement "
+    req = f"""
+        SELECT type_aliment, niveau_enseignement, COUNT(*) 
+        FROM sondage
+        GROUP BY type_aliment, niveau_enseignement
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-def aliment_types_repartition_by_moment_morning():
+def aliment_types_repartition_by_school_level(school_level: str):
+    """
+    :param school_level: Must be **Collège** or **Lycée**
+    """
+
     def generate_dict(list):
-        [type_aliment, moment, count] = list
+        [type_aliment, count] = list
         return {
             "type_aliment": type_aliment,
-            "moment": moment,
             "count": count
         }
 
-    req = "SELECT type_aliment, moment_journee, COUNT(*) FROM sondage WHERE moment_journee = 'Matin' " \
-          "GROUP BY type_aliment, moment_journee"
+    req = f"""
+        SELECT type_aliment, COUNT(*) 
+        FROM sondage 
+        WHERE niveau_enseignement = {school_level}
+        GROUP BY type_aliment
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-def aliment_types_repartition_by_moment_evening():
+def aliment_types_repartition_by_moment(chosen_moment: str):
+    """
+    :param chosen_moment: Must be **Matin** or **Soir**
+    """
+
     def generate_dict(list):
-        [type_aliment, moment, count] = list
+        [type_aliment, count] = list
         return {
             "type_aliment": type_aliment,
-            "moment": moment,
             "count": count
         }
 
-    req = "SELECT type_aliment, moment_journee, COUNT(*) FROM sondage WHERE moment_journee = 'Soir' " \
-          "GROUP BY type_aliment, moment_journee"
+    req = f"""
+        SELECT type_aliment, COUNT(*)
+        FROM sondage
+        WHERE moment_journee = {chosen_moment}
+        GROUP BY type_aliment
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
-def aliment_types_repartition_in_college_evening():
+def aliment_types_repartition_by_school_level_and_moment(school_level: str, chosen_moment: str):
+    """
+    :param school_level: Must be **Collège** or **Lycée**
+    :param chosen_moment: Must be **Matin** or **Soir**
+    """
+
     def generate_dict(list):
-        [type_aliment, moment, niveau_enseignement, count] = list
+        [type_aliment, count] = list
         return {
             "type_aliment": type_aliment,
-            "moment": moment,
-            "niveau_enseignement": niveau_enseignement,
             "count": count
         }
 
-    req = "SELECT type_aliment, moment_journee, niveau_enseignement, COUNT(*)" \
-          "FROM sondage WHERE (niveau_enseignement = 'Collège' AND moment_journee = 'Soir') " \
-          "GROUP BY type_aliment, moment_journee, niveau_enseignement"
-    cursor.execute(req)
-    result = cursor.fetchall()
-    return list(map(generate_dict, result))
+    req = f"""
+        SELECT type_aliment, COUNT(*)
+        FROM sondage 
+        WHERE (niveau_enseignement = {school_level} AND moment_journee = {chosen_moment})
+        GROUP BY type_aliment
+    """
 
-
-def aliment_types_repartition_in_lycee_morning():
-    def generate_dict(list):
-        [type_aliment, moment, niveau_enseignement, count] = list
-        return {
-            "type_aliment": type_aliment,
-            "moment": moment,
-            "niveau_enseignement": niveau_enseignement,
-            "count": count
-        }
-
-    req = "SELECT type_aliment, moment_journee, niveau_enseignement, COUNT(*)" \
-          "FROM sondage WHERE (niveau_enseignement = 'Lycée' AND moment_journee = 'Matin') " \
-          "GROUP BY type_aliment, moment_journee, niveau_enseignement"
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
@@ -161,10 +164,59 @@ def most_ate_aliment():
             "count": count
         }
 
-    req = "SELECT aliment, COUNT(*) AS nombre FROM sondage GROUP BY aliment ORDER BY nombre DESC LIMIT 1"
+    req = """
+        SELECT aliment, COUNT(*) AS nombre
+        FROM sondage 
+        GROUP BY aliment 
+        ORDER BY nombre 
+        DESC LIMIT 1
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
-    return list(map(generate_dict, result))
+    return list(map(generate_dict, result))[0]
+
+
+def most_age_participated():
+    def generate_dict(list):
+        [age, count] = list
+        return {
+            "age": age,
+            "count": count
+        }
+
+    req = """
+        SELECT age, COUNT(*) AS nombre
+        FROM sondage 
+        GROUP BY age 
+        ORDER BY nombre 
+        DESC LIMIT 1
+    """
+
+    cursor.execute(req)
+    result = cursor.fetchall()
+    return list(map(generate_dict, result))[0]
+
+
+def most_school_level_participated():
+    def generate_dict(list):
+        [school_level, count] = list
+        return {
+            "niveau_enseignement": school_level,
+            "count": count
+        }
+
+    req = """
+        SELECT niveau_enseignement, COUNT(*) AS nombre
+        FROM sondage 
+        GROUP BY niveau_enseignement 
+        ORDER BY nombre 
+        DESC LIMIT 1
+    """
+
+    cursor.execute(req)
+    result = cursor.fetchall()
+    return list(map(generate_dict, result))[0]
 
 
 def mean_age_by_aliment_types():
@@ -175,15 +227,29 @@ def mean_age_by_aliment_types():
             "mean": mean
         }
 
-    req = "SELECT type_aliment, AVG(age) FROM sondage GROUP BY type_aliment"
+    req = """
+        SELECT type_aliment, AVG(age)
+        FROM sondage 
+        GROUP BY type_aliment
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
 
 def mean_kcal():
-    req = "SELECT AVG(`Energie, Règlement UE N° 1169/2011 (kcal/100 g)`) FROM sondage INNER JOIN aliments ON " \
-          "aliments.alim_nom_fr = sondage.aliment WHERE `Energie, Règlement UE N° 1169/2011 (kcal/100 g)` <> '-'"
+    kcal_table_name = "Energie, Règlement UE N° 1169/2011 (kcal/100 g)"
+
+    req = f"""
+        SELECT AVG(`{kcal_table_name}`) 
+        FROM sondage 
+            INNER JOIN aliments ON aliments.alim_nom_fr = sondage.aliment 
+        WHERE `{kcal_table_name}` <> '-'
+    """
+
     cursor.execute(req)
     result = cursor.fetchall()
-    return result
+    return {
+        "mean": result[0][0]
+    }
