@@ -1,27 +1,18 @@
-from flask import Flask, render_template
-from flask_cors import CORS
+from flask import Blueprint
+from backend.service.surveyService import *
+from backend.controller.blueprints.repartitionController import repartition_blueprint
+from backend.controller.blueprints.meanController import mean_blueprint
+from backend.controller.blueprints.mostController import most_blueprint
 
-from assets.py.backend.service.surveyService import *
-
-app = Flask(__name__)
-CORS(app)
-
-
-@app.route("/aliment_types_repartition")
-def getResults1():
-    return aliment_types_repartition()
+main_blueprint = Blueprint('main', __name__)
+main_blueprint.register_blueprint(repartition_blueprint, url_prefix='/repartition')
+main_blueprint.register_blueprint(mean_blueprint, url_prefix='/mean')
+main_blueprint.register_blueprint(most_blueprint, url_prefix='/most')
 
 
-@app.route("/most_ate_aliment")
-def getResults2():
-    return most_ate_aliment()
-
-
-@app.route("/mean_age_by_aliment_types")
-def getResults3():
-    return mean_age_by_aliment_types()
-
-
-@app.route("/mean_kcal")
-def getResults4():
-    return mean_kcal()
+@main_blueprint.get("/")
+def welcome():
+    # return render_template('welcome.html') //TODO welcome page ? (Extra-feature)
+    return {
+        "message": "Welcome ! API Works"
+    }
