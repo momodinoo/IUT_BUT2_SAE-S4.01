@@ -5,7 +5,7 @@ from backend.controller.surveyController import main_blueprint
 SERVER_IP = "0.0.0.0"
 SERVER_PORT = 5000
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 app.register_blueprint(main_blueprint)
 CORS(app)
 
