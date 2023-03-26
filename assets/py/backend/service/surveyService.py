@@ -168,7 +168,22 @@ def most_ate_aliment():
 
 
 def mean_age_by_aliment_types():
+    def generate_dict(list):
+        [type_aliment, mean] = list
+        return {
+            "type_aliment": type_aliment,
+            "mean": mean
+        }
+
     req = "SELECT type_aliment, AVG(age) FROM sondage GROUP BY type_aliment"
+    cursor.execute(req)
+    result = cursor.fetchall()
+    return list(map(generate_dict, result))
+
+
+def mean_kcal():
+    req = "SELECT AVG(`Energie, Règlement UE N° 1169/2011 (kcal/100 g)`) FROM sondage INNER JOIN aliments ON " \
+          "aliments.alim_nom_fr = sondage.aliment WHERE `Energie, Règlement UE N° 1169/2011 (kcal/100 g)` <> '-'"
     cursor.execute(req)
     result = cursor.fetchall()
     return result
