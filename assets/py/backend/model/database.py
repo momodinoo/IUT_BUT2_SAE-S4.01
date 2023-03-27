@@ -22,10 +22,17 @@ class Database:
         self.connect()
 
     def connect(self):
-        if self.database is None:
-            self.database = mysql.connector.connect(**self.config)
-
-        return self.database
+        self.database = mysql.connector.connect(**self.config)
 
     def get_cursor(self):
         return self.database.cursor()
+
+    def query(self, sql):
+        try:
+            cursor = self.get_cursor()
+            cursor.execute(sql)
+        except (mysql.connector.errors.InterfaceError, mysql.connector.errors.OperationalError):
+            self.connect()
+            cursor = self.get_cursor()
+            cursor.execute(sql)
+        return cursor

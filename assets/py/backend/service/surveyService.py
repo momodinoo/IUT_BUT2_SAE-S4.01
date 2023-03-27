@@ -1,7 +1,6 @@
 from backend.model.database import Database
 
 db = Database()
-cursor = db.get_cursor()
 
 
 def aliment_types_repartition():
@@ -18,7 +17,7 @@ def aliment_types_repartition():
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -32,15 +31,43 @@ def aliment_types_repartition_with_all_ages():
             "count": count
         }
 
+    def get_age_index_array(array: list, age: int):
+        for i in range(len(array)):
+            element = array[i]
+            if element["age"] == age:
+                return i
+        return -1
+
+    def get_age(element):
+        return element["age"]
+
     req = f"""
         SELECT type_aliment, age, COUNT(*) 
         FROM sondage
         GROUP BY type_aliment, age
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
-    return list(map(generate_dict, result))
+    result = list(map(generate_dict, result))
+    to_return = []
+    for e in result:
+        index = get_age_index_array(to_return, e["age"])
+        data_to_add = {
+            "type_aliment": e["type_aliment"],
+            "count": e["count"]
+        }
+        if index == -1:
+            to_return.append({
+                "age": e["age"],
+                "data": [data_to_add]
+            })
+        else:
+            to_return[index]["data"].append(data_to_add)
+
+    to_return.sort(key=get_age)
+
+    return to_return
 
 
 def aliment_types_repartition_by_age(chosen_age: int):
@@ -58,7 +85,7 @@ def aliment_types_repartition_by_age(chosen_age: int):
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -78,7 +105,7 @@ def aliment_types_repartition_with_all_school_level():
         GROUP BY type_aliment, niveau_enseignement
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -102,7 +129,7 @@ def aliment_types_repartition_by_school_level(school_level: str):
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -126,7 +153,7 @@ def aliment_types_repartition_by_moment(chosen_moment: str):
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -151,7 +178,7 @@ def aliment_types_repartition_by_school_level_and_moment(school_level: str, chos
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -172,7 +199,7 @@ def most_ate_aliment():
         DESC LIMIT 1
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))[0]
 
@@ -193,7 +220,7 @@ def most_age_participated():
         DESC LIMIT 1
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))[0]
 
@@ -214,7 +241,7 @@ def most_school_level_participated():
         DESC LIMIT 1
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))[0]
 
@@ -233,7 +260,7 @@ def mean_age_by_aliment_types():
         GROUP BY type_aliment
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
 
@@ -248,7 +275,7 @@ def mean_kcal():
         WHERE `{kcal_table_name}` <> '-'
     """
 
-    cursor.execute(req)
+    cursor = db.query(req)
     result = cursor.fetchall()
     return {
         "mean": result[0][0]
