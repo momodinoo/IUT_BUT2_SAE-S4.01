@@ -1,7 +1,7 @@
 from flask import Blueprint
-from backend.controller.blueprints.repartitionController import repartition_blueprint
-from backend.controller.blueprints.meanController import mean_blueprint
-from backend.controller.blueprints.mostController import most_blueprint
+from .blueprints.repartitionController import repartition_blueprint
+from .blueprints.meanController import mean_blueprint
+from .blueprints.mostController import most_blueprint
 
 main_blueprint = Blueprint('main', __name__)
 main_blueprint.register_blueprint(repartition_blueprint, url_prefix='/repartition')

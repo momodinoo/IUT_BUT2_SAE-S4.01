@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from backend.service.surveyService import most_ate_aliment, most_age_participated, most_school_level_participated
+from service.surveyService import most_ate_aliment, most_age_participated, most_school_level_participated
 
 most_blueprint = Blueprint('most', __name__)
 

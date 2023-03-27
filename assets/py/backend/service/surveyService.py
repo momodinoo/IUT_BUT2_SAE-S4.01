@@ -1,4 +1,4 @@
-from backend.model.database import Database
+from model.database import Database
 
 db = Database()
 
@@ -181,6 +181,58 @@ def aliment_types_repartition_by_school_level_and_moment(school_level: str, chos
     cursor = db.query(req)
     result = cursor.fetchall()
     return list(map(generate_dict, result))
+
+
+def aliment_types_repartition_with_school_level_and_moment():
+    def generate_dict(list):
+        [type_aliment, school_level, moment, count] = list
+        return {
+            "type_aliment": type_aliment,
+            "niveau_enseignement": school_level,
+            "moment": moment,
+            "count": count
+        }
+
+    req = f"""
+        SELECT type_aliment, niveau_enseignement, moment_journee, COUNT(*)
+        FROM sondage
+        GROUP BY type_aliment, niveau_enseignement, moment_journee
+    """
+
+    cursor = db.query(req)
+    result = cursor.fetchall()
+    result = list(map(generate_dict, result))
+
+    to_return = [
+        {
+            "school_level": "Lycée",
+            "morning": [],
+            "evening": [],
+        },
+        {
+            "school_level": "Collège",
+            "morning": [],
+            "evening": [],
+        }
+    ]
+
+    for e in result:
+        data_to_add = {
+            "type_aliment": e["type_aliment"],
+            "count": e["count"]
+        }
+
+        to_append = to_return[0]
+
+        if e["niveau_enseignement"] == "Collège":
+            to_append = to_return[1]
+
+        if e["moment"] == "Matin":
+            to_append["morning"].append(data_to_add)
+        else:
+            to_append["evening"].append(data_to_add)
+
+    return to_return
 
 
 def most_ate_aliment():

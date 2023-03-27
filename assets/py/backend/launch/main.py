@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from backend.controller.surveyController import main_blueprint
+from controller.surveyController import main_blueprint
 
 SERVER_IP = "0.0.0.0"
 SERVER_PORT = 5000

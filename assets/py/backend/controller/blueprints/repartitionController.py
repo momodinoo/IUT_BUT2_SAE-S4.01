@@ -1,8 +1,9 @@
 from flask import Blueprint
-from backend.service.surveyService import \
+from service.surveyService import \
     aliment_types_repartition, aliment_types_repartition_by_age, aliment_types_repartition_with_all_ages, \
     aliment_types_repartition_with_all_school_level, aliment_types_repartition_by_school_level, \
-    aliment_types_repartition_by_moment, aliment_types_repartition_by_school_level_and_moment
+    aliment_types_repartition_by_moment, aliment_types_repartition_by_school_level_and_moment, \
+    aliment_types_repartition_with_school_level_and_moment
 
 repartition_blueprint = Blueprint('repartition', __name__)
 
@@ -32,7 +33,7 @@ def get_aliment_type_repartition_by_age(chosen_age: int):
     return aliment_types_repartition_by_age(chosen_age)
 
 
-@repartition_blueprint.get("/age/all")
+@repartition_blueprint.get("/school/all")
 def get_aliment_type_repartition_with_all_school_level():
     return aliment_types_repartition_with_all_school_level()
 
@@ -45,6 +46,11 @@ def get_aliment_type_repartition_by_school_level(school_level: str):
 @repartition_blueprint.get("/moment/<moment>")
 def get_aliment_type_repartition_by_moment(moment: str):
     return aliment_types_repartition_by_moment(moment)
+
+
+@repartition_blueprint.get("/school_moment/all")
+def get_aliment_types_repartition_with_school_level_and_moment():
+    return aliment_types_repartition_with_school_level_and_moment()
 
 
 @repartition_blueprint.get("/<school_level>/<moment>")

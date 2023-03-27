@@ -48,31 +48,30 @@
     <h1 class="title">Visualiser les résultats</h1>
     <h3 class="subtitle">Ci-dessous, un aperçu et une analyse des résultats récoltés.</h3>
 
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
+    <section>
+        <canvas id="ageChart"></canvas>
 
-    <div class="chart">
-        <canvas id="myCharet"></canvas>
-    </div>
+        <label>
+            <label for="filterAge">Filtrer par âge</label>
+            <select id="filterAge" name="filterAge">
+                <option selected value="all">Tous les âges</option>
+            </select>
+        </label>
+    </section>
 
-    <div class="chart">
-        <canvas id="myCzezhart"></canvas>
-    </div>
+    <section>
 
-    <div class="chart">
-        <canvas id="myCezehart"></canvas>
-    </div>
+        <canvas id="schoolMomentChart"></canvas>
 
-    <div class="chart">
-        <canvas id="myCezhart"></canvas>
-    </div>
+    </section>
 
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../assets/js/blackMode.js"></script>
-<script src="../assets/js/dataResults.js"></script>
 <script src="../assets/js/getPythonData.js"></script>
+<script src="../assets/js/generateColors.js"></script>
+<script async src="../assets/js/charts/ageChart.js"></script>
+<script async src="../assets/js/charts/schoolMomentChart.js"></script>
 
 </body>
 </html>

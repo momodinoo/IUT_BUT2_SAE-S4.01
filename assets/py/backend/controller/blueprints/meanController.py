@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from backend.service.surveyService import mean_age_by_aliment_types, mean_kcal
+from service.surveyService import mean_age_by_aliment_types, mean_kcal
 
 mean_blueprint = Blueprint('mean', __name__)
 
