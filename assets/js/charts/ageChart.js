@@ -20,7 +20,7 @@
             return array.map(e => e.count)
         },
         generateChartLabel = array => {
-            return array.map(e => e.type_aliment)
+            return array.map(e => e.type_aliment.charAt(0).toUpperCase() + e.type_aliment.slice(1))
         },
         generateChartColors = array => {
             return generateColors(array.length)
@@ -42,8 +42,8 @@
 
     data.datasets[0] = {
         ...data.datasets[0],
-        label: "Répartition des aliments par rapport à l'âge",
-        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--base-navbar-background-color'),
+        label: "Nombre d'utilisateurs ",
+        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
         hoverOffset: 4
     }
 
@@ -52,9 +52,26 @@
         options: {
             responsive: true,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Répartition des aliments par âge, actuellement : (Tout âge compris)'
+                /*title: {
+                    display: false,
+                    text: "Répartition des types d'aliments par âge, actuellement : Tous les âges",
+                    padding : {
+                        top : 15
+                    },
+                    color: getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                    font : {
+                        weight : "normal",
+                        size : 25
+                    },
+                },*/
+                legend:{
+                    position: 'right',
+
+                    labels:{
+                        color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                        boxWidth : 75,
+                        padding : 20
+                    },
                 },
             },
         },
@@ -65,7 +82,7 @@
         const value = select.options[select.selectedIndex].value;
         let data = (value === "all") ? allRepartition : repartitionByAge.filter(e => e.age === +value)[0].data
 
-        chart.options.plugins.title.text = `Répartition des aliments par âge, actuellement : (${(value === "all") ? "Tout âge compris" : value + " ans"})`
+        document.getElementById("titleChartAge").innerHTML = `Répartition des aliments par âge, actuellement : ${(value === "all") ? "Tous les âges" : value + " ans"}`
 
         chart.data.labels = generateChartLabel(data)
         chart.data.datasets = [{

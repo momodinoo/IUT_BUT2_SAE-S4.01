@@ -7,13 +7,16 @@
     const morningAlimentSet = new Set()
     const eveningAlimentSet = new Set()
 
-    const addAlimentToSet = (setElement, array) => {
+    const capitalizeAliment = aliment => {
+            return aliment.charAt(0).toUpperCase() + aliment.slice(1)
+        },
+        addAlimentToSet = (setElement, array) => {
             array.forEach(e => {
-                setElement.add(e.type_aliment)
+                setElement.add(capitalizeAliment(e.type_aliment))
             })
         },
         getAlimentCount = (array, alimentName) => {
-            return array.filter(e => e.type_aliment === alimentName)[0]?.count ?? 0;
+            return array.filter(e => capitalizeAliment(e.type_aliment) === alimentName)[0]?.count ?? 0;
         },
         getColor = (array, alimentName) => {
             return array.filter(e => e.aliment === alimentName)[0].color
@@ -81,6 +84,13 @@
                 },
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (tooltipItems) => {
+                            return `${tooltipItems[0].dataset.stack}`;
+                        }
+                    }
                 }
             },
             responsive: true,

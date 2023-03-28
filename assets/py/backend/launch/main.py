@@ -10,5 +10,5 @@ app.register_blueprint(main_blueprint)
 CORS(app)
 
 if __name__ == "__main__":
-    app.run(SERVER_IP, SERVER_PORT)
+    app.run(SERVER_IP, SERVER_PORT, threaded=False)
 

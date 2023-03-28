@@ -47,11 +47,12 @@
 <main class="container">
     <h1 class="title">Visualiser les résultats</h1>
     <h3 class="subtitle">Ci-dessous, un aperçu et une analyse des résultats récoltés.</h3>
-
-    <section>
+    <hr class="lineBreak">
+    <section id="ageSection">
+        <div class="titleChart" id="titleChartAge">Répartition des types d'aliments par âge, actuellement : Tous les âges</div>
         <canvas id="ageChart"></canvas>
 
-        <label>
+        <label class="select-age">
             <label for="filterAge">Filtrer par âge</label>
             <select id="filterAge" name="filterAge">
                 <option selected value="all">Tous les âges</option>

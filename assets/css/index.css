@@ -31,19 +31,6 @@ body.black-mode {
     --base-color-option : var(--base-color-option-dark);
 }
 
-/*
-@media (prefers-color-scheme: dark) {
-    body {
-        --base-color: var(--base-color-dark);
-        --base-background-color: var(--base-background-color-dark);
-        --base-navbar-background-color: var(--base-navbar-background-color-dark);
-        --base-navbar-box-shadow: var(--base-navbar-box-shadow-dark);
-        --base-display-errors-color: var(--base-display-errors-color-dark);
-        --base-display-success-color: var(--base-display-success-color-dark);
-    }
-}
-*/
-
 *, *::before, *::after {
     margin: 0;
     padding: 0;

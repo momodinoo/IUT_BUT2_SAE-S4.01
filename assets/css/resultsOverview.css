@@ -1,0 +1,30 @@
+.container{
+    width:60%;
+}
+
+.lineBreak{
+    margin-top: 32px;
+}
+#ageSection{
+    position: relative;
+}
+
+.titleChart{
+    margin-top:5%;
+    font-size: x-large;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    width:100%;
+}
+
+#ageChart{
+    width:80%;
+}
+
+.select-age{
+    position: absolute;
+    bottom:8%;
+    left:36%;
+    transform: translateX(-50%);
+}

@@ -22,7 +22,7 @@ const generateColors = (count) => {
         "rgb(177,248,228)",
         "rgb(9,109,10)",
         "rgb(189,57,193)",
-        "rgb(236,210,126)",
+        "rgb(58,49,116)",
     ]
 
     arrayToReturn = _shuffleArray(arrayToReturn)
