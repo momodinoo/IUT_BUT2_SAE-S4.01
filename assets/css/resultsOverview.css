@@ -27,4 +27,12 @@
     bottom:8%;
     left:36%;
     transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+    width:25%;
+    font-size:20px;
+}
+
+.selectAge{
+    border: none;
 }

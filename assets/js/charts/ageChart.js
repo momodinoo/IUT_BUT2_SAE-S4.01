@@ -42,7 +42,7 @@
 
     data.datasets[0] = {
         ...data.datasets[0],
-        label: "Nombre d'utilisateurs ",
+        label: " Nombre d'utilisateurs ",
         borderColor: getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
         hoverOffset: 4
     }
@@ -70,7 +70,10 @@
                     labels:{
                         color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
                         boxWidth : 75,
-                        padding : 20
+                        padding : 20,
+                        font:{
+                            size:16
+                        }
                     },
                 },
             },
