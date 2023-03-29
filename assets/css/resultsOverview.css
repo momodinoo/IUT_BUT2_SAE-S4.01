@@ -7,6 +7,7 @@
 }
 
 .section-chart {
+    position: relative;
     margin-bottom: 0;
 }
 
@@ -26,6 +27,10 @@
 }
 
 #titleChartAge{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5vh;
     margin-bottom: -17vh;
 }
 
@@ -74,4 +79,47 @@
 
 #type-aliment{
     margin-bottom: 3%;
+}
+
+/** **** **** **/
+
+.age-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.age-choices {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.age-choices.show {
+    display: block;
+}
+
+.age-selected {
+    opacity: 1;
+    text-decoration: underline;
+    text-decoration-color: var(--base-color);
+    cursor: pointer;
+}
+
+.age-selected.hide {
+    opacity: 0;
+}
+
+.age-selected:hover {
+    text-decoration-color: var(--base-background-color);
+}
+
+.age-choices > div {
+    position: relative;
+}
+
+.age-choices li {
+    list-style: none;
 }

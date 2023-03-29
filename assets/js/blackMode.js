@@ -19,6 +19,9 @@ checkbox.onchange = () => toggleBlackMode();
 const toggleBlackMode = () => {
     document.body.classList.toggle("black-mode");
     window.localStorage.setItem('theme', document.body.classList.contains("black-mode") ? "dark" : "light");
+
+    const event = new CustomEvent("toggleBlackMode");
+    document.dispatchEvent(event);
 }
 
 const setDarkMode = () => {

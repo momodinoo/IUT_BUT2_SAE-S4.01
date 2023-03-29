@@ -2,7 +2,7 @@
 
     const ctx = document.getElementById("schoolMomentChart");
 
-    const [college, lycee] = await getPythonResults('/repartition/school_moment/all');
+    const [lycee, college] = await getPythonResults('/repartition/school_moment/all');
 
     const morningAlimentSet = new Set()
     const eveningAlimentSet = new Set()
@@ -85,6 +85,16 @@
                     callbacks: {
                         title: (tooltipItems) => {
                             return `${tooltipItems[0].dataset.stack}`;
+                        },
+                        label: (tooltipItem) => {
+                            const getSchoolLevel = tooltipItem.label === "Collège" ? college : lycee
+                            const getMoment = tooltipItem.dataset.stack === "Matin" ? getSchoolLevel.morning : getSchoolLevel.evening;
+                            let countElements = 0;
+                            getMoment.forEach(e => countElements += e.count);
+
+                            const elementCount = tooltipItem.parsed.y;
+                            const percentage = ((elementCount / countElements) * 100).toFixed(2);
+                            return `${tooltipItem.dataset.label} : ${percentage}%`
                         }
                     }
                 }
@@ -94,27 +104,35 @@
                 intersect: true,
             },
             scales: {
-
                 x: {
                     stacked: true,
-                    grid:{
-                        color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                    grid: {
+                        //color: getComputedStyle(document.body).getPropertyValue('--base-color'),
+                        color:"#D93D3D",
+                        lineWidth:2
                     },
                 },
                 y: {
                     stacked: true,
-                    grid:{
-                        color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                    grid: {
+                        color:"#D93D3D",
+                        lineWidth:2
                     }
                 },
-
             },
         },
     };
 
-    Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark')
+    Chart.defaults.color = "#D93D3D"
     Chart.defaults.font.size = 16
-    const chart = new Chart(ctx, config)
+    let chart = new Chart(ctx, config)
+    chart.reset()
+    chart.update()
 
+    document.addEventListener("toggleBlackMode", () => {
+        //chart.options.scales.x.grid.color = getComputedStyle(document.body).getPropertyValue('--base-color');
+        //chart.options.scales.y.grid.color = getComputedStyle(document.body).getPropertyValue('--base-color');
+        chart.update()
+    })
 
 })();
