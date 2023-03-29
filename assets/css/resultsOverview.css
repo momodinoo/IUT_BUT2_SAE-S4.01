@@ -1,38 +1,77 @@
-.container{
-    width:60%;
+.container {
+    width: 60%;
 }
 
-.lineBreak{
-    margin-top: 32px;
-}
-#ageSection{
-    position: relative;
+.lineBreak {
+    margin-top: 45px;
 }
 
-.titleChart{
-    margin-top:5%;
+.section-chart {
+    margin-bottom: 0;
+}
+
+.titleChart {
+    margin-top: 5vh;
+    text-align: center;
     font-size: x-large;
+    width: 100%;
+
+    position: relative;
+    z-index: 2;
+}
+
+#schoolSection{
+    margin-bottom: 8%;
+    margin-top: -10vh;
+}
+
+#titleChartAge{
+    margin-bottom: -17vh;
+}
+
+#titleChartSchoolMoment {
+    margin-bottom: 32px;
+    margin-top: 0;
+}
+
+#ageChart {
+    width: 100% !important;
+    height: 100% !important;
+    margin: -5vh auto 0;
+}
+
+.select-age {
     position: absolute;
-    left:50%;
+    bottom: 8%;
+    left: 36%;
     transform: translateX(-50%);
-    width:100%;
 }
 
-#ageChart{
-    width:80%;
+.infos{
+    font-style: normal;
+    margin-top: 0;
+    margin-bottom: 5%;
+    font-size:x-large;
+    text-align: justify;
+    width:100%
 }
 
-.select-age{
-    position: absolute;
-    bottom:8%;
-    left:36%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-around;
-    width:25%;
-    font-size:20px;
+#informations{
+    font-size:large;
+    margin-top: 3%;
+    margin-left: -2%;
+
 }
 
-.selectAge{
-    border: none;
+#informations > li{
+    margin-bottom: 3%;
+}
+
+#mean-aliments-type > li{
+    margin-top: 2%;
+    margin-left: 4%;
+}
+
+#type-aliment{
+    margin-bottom: 3%;
 }

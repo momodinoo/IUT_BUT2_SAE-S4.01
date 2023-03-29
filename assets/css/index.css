@@ -169,7 +169,7 @@ body {
 
 .container {
     width: 50%;
-    padding: 1% 2% 0;
+    padding: 1% 0;
     margin: 0 auto auto;
 }
 
@@ -181,6 +181,7 @@ form {
     text-transform: uppercase;
     letter-spacing: 0.15em;
     margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 .container .subtitle {

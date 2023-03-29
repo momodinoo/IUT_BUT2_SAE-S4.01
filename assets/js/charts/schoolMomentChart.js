@@ -78,10 +78,6 @@
         data: data,
         options: {
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Répartition des aliments consommés par niveau scolaire et moment de la journée'
-                },
                 legend: {
                     display: false
                 },
@@ -98,16 +94,27 @@
                 intersect: true,
             },
             scales: {
+
                 x: {
                     stacked: true,
+                    grid:{
+                        color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                    },
                 },
                 y: {
-                    stacked: true
-                }
-            }
-        }
+                    stacked: true,
+                    grid:{
+                        color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
+                    }
+                },
+
+            },
+        },
     };
 
+    Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark')
+    Chart.defaults.font.size = 16
     const chart = new Chart(ctx, config)
+
 
 })();

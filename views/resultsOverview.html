@@ -9,9 +9,9 @@
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           referrerpolicy="no-referrer" rel="stylesheet"/>
-    <link href="../assets/img/icon.ico" rel="icon">
-    <link href="../assets/css/index.css" rel="stylesheet">
-    <link href="../assets/css/resultsOverview.css" rel="stylesheet">
+    <link href="assets/img/icon.ico" rel="icon">
+    <link href="assets/css/index.css" rel="stylesheet">
+    <link href="assets/css/resultsOverview.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,11 +48,11 @@
     <h1 class="title">Visualiser les résultats</h1>
     <h3 class="subtitle">Ci-dessous, un aperçu et une analyse des résultats récoltés.</h3>
     <hr class="lineBreak">
-    <section id="ageSection">
+    <section class="section-chart" id="ageSection">
         <div class="titleChart" id="titleChartAge">Répartition des types d'aliments par âge, actuellement : Tous les âges</div>
         <canvas id="ageChart"></canvas>
 
-        <label class="select-age">
+        <label class="select-age" style="display: none">
             <label for="filterAge">Filtrer par âge</label>
             <select class="selectAge" id="filterAge" name="filterAge">
                 <option selected value="all">Tous les âges</option>
@@ -60,19 +60,38 @@
         </label>
     </section>
 
-    <section>
-
+    <section class="section-chart" id="schoolSection">
+        <div class="titleChart" id="titleChartSchoolMoment">Répartition des types d'aliments consommés par niveau scolaire et moment de la journée</div>
         <canvas id="schoolMomentChart"></canvas>
 
     </section>
+    <div class="infos">
+        Quelques infos :
+        <ul id="informations">
+            <li>
+                <p id="mean-kcal"></p>
+            </li>
+            <li>
+                <p id="most-aliment"></p>
+            </li>
+            <li>
+                <p id="type-aliment"> Le type d'aliment : </p>
+                <ul id="mean-aliments-type">
 
+                </ul>
+            </li>
+        </ul>
+
+
+    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../assets/js/blackMode.js"></script>
-<script src="../assets/js/getPythonData.js"></script>
-<script src="../assets/js/generateColors.js"></script>
-<script async src="../assets/js/charts/ageChart.js"></script>
-<script async src="../assets/js/charts/schoolMomentChart.js"></script>
+<script src="assets/js/blackMode.js"></script>
+<script src="assets/js/getPythonData.js"></script>
+<script src="assets/js/generateColors.js"></script>
+<script async src="assets/js/charts/ageChart.js"></script>
+<script async src="assets/js/charts/schoolMomentChart.js"></script>
+<script async src="assets/js/charts/someInformations.js"></script>
 
 </body>
 </html>

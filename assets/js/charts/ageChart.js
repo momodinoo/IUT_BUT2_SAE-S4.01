@@ -52,25 +52,13 @@
         options: {
             responsive: true,
             plugins: {
-                /*title: {
-                    display: false,
-                    text: "Répartition des types d'aliments par âge, actuellement : Tous les âges",
-                    padding : {
-                        top : 15
-                    },
-                    color: getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
-                    font : {
-                        weight : "normal",
-                        size : 25
-                    },
-                },*/
                 legend:{
                     position: 'right',
-
                     labels:{
                         color:getComputedStyle(document.documentElement).getPropertyValue('--base-color-dark'),
-                        boxWidth : 75,
-                        padding : 20,
+                        boxWidth : 80,
+                        boxHeight : 25,
+                        padding : 30,
                         font:{
                             size:16
                         }
@@ -94,7 +82,6 @@
         }]
 
         chart.update();
-
     }
 
 })();
