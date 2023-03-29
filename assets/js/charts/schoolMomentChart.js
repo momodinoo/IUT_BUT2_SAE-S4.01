@@ -40,9 +40,11 @@
 
     generateSet();
 
-    const alimentList = [...morningAlimentSet, ...eveningAlimentSet]
+    const alimentSet = new Set([...morningAlimentSet, ...eveningAlimentSet]);
+    const alimentList = [...alimentSet]
     const colorList = generateColors(alimentList.length)
     const alimentColor = [];
+
 
     for (const aliment of alimentList) {
         alimentColor.push({

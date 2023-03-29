@@ -52,12 +52,14 @@
         <div class="titleChart" id="titleChartAge">
             Répartition des types d'aliments par âge, actuellement :
             <div class="age-selector" id="ageSelector">
-                <span data-value="all" class="age-selected" id="ageSelected">Tous les âges</span>
-                <ul class="age-choices" id="ageChoices">
-                    <div>
-                        <li data-value="all">Tous les âges</li>
-                    </div>
-                </ul>
+                <span value="all" class="age-selected" id="ageSelected">Tous les âges</span>
+
+                <div id="ageContext" class="age-choices-context">
+                    <ul class="age-choices" id="ageChoices">
+                        <li value="all">Tous les âges</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
         <canvas id="ageChart"></canvas>
@@ -71,7 +73,9 @@
     </section>
 
     <section class="section-chart" id="schoolSection">
-        <div class="titleChart" id="titleChartSchoolMoment">Répartition des types d'aliments consommés par niveau scolaire et moment de la journée</div>
+        <div class="titleChart" id="titleChartSchoolMoment">Répartition des types d'aliments consommés par niveau
+            scolaire et moment de la journée
+        </div>
         <canvas id="schoolMomentChart"></canvas>
 
     </section>

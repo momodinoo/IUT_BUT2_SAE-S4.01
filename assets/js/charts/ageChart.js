@@ -82,31 +82,47 @@
         data
     });
 
-
+    const ageContext = document.getElementById("ageContext")
     const ageSelector = document.getElementById("ageChoices")
-    const ageDiv = ageSelector.querySelector("div")
-    addAgeList(ageDiv, repartitionByAge);
+    addAgeList(ageSelector, repartitionByAge);
+
+    [...ageSelector.children].forEach(e => {
+        e.addEventListener("click", a => {
+
+            ageSelected.innerHTML = e.innerHTML
+            ageSelected.setAttribute("value", e.getAttribute("value"))
+
+            ageContext.classList.toggle("show");
+            ageSelected.classList.toggle("hide");
+
+            const event = new CustomEvent("ageChange")
+            document.dispatchEvent(event);
+        })
+    })
 
     const ageSelected = document.getElementById("ageSelected");
     ageSelected.onclick = () => {
-        ageSelector.classList.toggle("show");
-        ageSelected.classList.toggle("hide")
+        ageContext.classList.toggle("show");
+        ageSelected.classList.toggle("hide");
     }
 
-    select.onchange = () => {
-        const value = select.options[select.selectedIndex].value;
-        let data = (value === "all") ? allRepartition : repartitionByAge.filter(e => e.age === +value)[0].data
+    document.addEventListener("ageChange", () => {
 
-        document.getElementById("titleChartAge").innerHTML = `Répartition des aliments par âge, actuellement : ${(value === "all") ? "Tous les âges" : value + " ans"}`
+        const value = ageSelected.getAttribute("value");
+        const data = (value === "all") ? allRepartition : repartitionByAge.filter(e => e.age === +value)[0].data
 
         chart.data.labels = generateChartLabel(data)
         chart.data.datasets = [{
             data: generateChartData(data),
             backgroundColor: generateChartColors(data)
         }]
-
+        chart.options.plugins.tooltip.callbacks.label = ({parsed}) => {
+            const count = getAlimentCount(data)
+            const percentage = (parsed / count) * 100
+            return ` Pourcentage : ${percentage.toFixed(2)}%`
+        }
         chart.update();
-    }
+    })
 
     document.addEventListener("toggleBlackMode", () => {
         chart.data.datasets[0].borderColor= getComputedStyle(document.body).getPropertyValue('--base-color');

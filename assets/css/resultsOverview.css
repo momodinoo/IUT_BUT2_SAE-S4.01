@@ -21,12 +21,12 @@
     z-index: 2;
 }
 
-#schoolSection{
+#schoolSection {
     margin-bottom: 8%;
     margin-top: -10vh;
 }
 
-#titleChartAge{
+#titleChartAge {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -52,32 +52,32 @@
     transform: translateX(-50%);
 }
 
-.infos{
+.infos {
     font-style: normal;
     margin-top: 0;
     margin-bottom: 5%;
-    font-size:x-large;
+    font-size: x-large;
     text-align: justify;
-    width:100%
+    width: 100%
 }
 
-#informations{
-    font-size:large;
+#informations {
+    font-size: large;
     margin-top: 3%;
     margin-left: -2%;
 
 }
 
-#informations > li{
+#informations > li {
     margin-bottom: 3%;
 }
 
-#mean-aliments-type > li{
+#mean-aliments-type > li {
     margin-top: 2%;
     margin-left: 4%;
 }
 
-#type-aliment{
+#type-aliment {
     margin-bottom: 3%;
 }
 
@@ -88,7 +88,7 @@
     display: inline-block;
 }
 
-.age-choices {
+.age-choices-context {
     display: none;
     position: absolute;
     top: 0;
@@ -97,7 +97,7 @@
     right: 0;
 }
 
-.age-choices.show {
+.age-choices-context.show {
     display: block;
 }
 
@@ -116,10 +116,20 @@
     text-decoration-color: var(--base-background-color);
 }
 
-.age-choices > div {
+.age-choices {
     position: relative;
+    background-color: var(--base-navbar-background-color);
+    width: 216px;
 }
 
 .age-choices li {
     list-style: none;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid var(--base-background-color);
+    padding: .2rem 0;
+}
+
+.age-choices li:hover {
+    background-color: rgba(0, 0, 0, .1);
 }
