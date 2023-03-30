@@ -1,3 +1,5 @@
+from statistics import mean
+
 from model.database import Database
 
 db = Database()
@@ -320,15 +322,32 @@ def mean_age_by_aliment_types():
 def mean_kcal():
     kcal_table_name = "Energie, Règlement UE N° 1169/2011 (kcal/100 g)"
 
+    def get_kcal_value(element):
+        return element[0]
+
+    def remove_empty_value(element):
+        return element != '-' and element != ''
+
+    def replace_comma(element):
+        return element.replace(',', '.')
+
+    def set_values_to_float(element):
+        return float(element)
+
     req = f"""
-        SELECT AVG(`{kcal_table_name}`) 
+        SELECT `{kcal_table_name}`
         FROM sondage 
             INNER JOIN aliments ON aliments.alim_nom_fr = sondage.aliment 
-        WHERE `{kcal_table_name}` <> '-'
     """
 
     cursor = db.query(req)
     result = cursor.fetchall()
+    raw_values = list(map(get_kcal_value, result))
+    values = filter(remove_empty_value, raw_values)
+    cleaned_values = list(map(replace_comma, values))
+    int_values = list(map(set_values_to_float, cleaned_values))
+
+
     return {
-        "mean": result[0][0]
+        "mean": round(mean(int_values), 2)
     }
