@@ -351,3 +351,16 @@ def mean_kcal():
     return {
         "mean": round(mean(int_values), 2)
     }
+
+
+def most_count_participated():
+    req = f"""
+            SELECT COUNT(*)
+            FROM sondage 
+        """
+
+    cursor = db.query(req)
+    result = cursor.fetchall()
+    return {
+        "count": result[0][0]
+    }
