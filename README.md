@@ -17,9 +17,11 @@
 
 ---
 
+
+
 <h3>Utilisation</h3>
-[FR] Vous devez lancer l'application Flask ( `assets/py/launch/main.py` ) et host le site avant de pouvoir commencer à utiliser l'application. <br>
-[EN] You must launch the Flask application ( `assets/py/launch/main.py` ) and host the site before you can start using the application. 
+[FR] Vous devez lancer l'application Flask <code>assets/py/launch/main.py</code> et host le site avant de pouvoir commencer à utiliser l'application. <br>
+[EN] You must launch the Flask application <code>assets/py/launch/main.py</code> and host the site before you can start using the application. 
 
 ### License
 
